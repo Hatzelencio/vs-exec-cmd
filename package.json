@@ -1,0 +1,76 @@
+{
+  "name": "exec-cmd",
+  "displayName": "Exec Cmd",
+  "description": "Selecciona un bloque de texto y ejecutarlo directamente.",
+  "version": "0.0.1",
+  "publisher": "hatzelencio",
+  "engines": {
+    "vscode": "^1.17.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+		"exec",
+		"execute",
+		"command",
+		"shell",
+		"tacos"
+	],
+  "activationEvents": [
+    "onCommand:exec-cmd.execute"
+  ],
+  "main": "./extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "exec-cmd.execute",
+        "category": "Exec Cmd",
+        "title": "Execute Selected Text"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "exec-cmd.execute",
+        "key": "alt+r",
+        "mac": "alt+r"
+      }
+    ],
+    "configuration": {
+			"type": "object",
+			"title": "Exec Cmd Configuration",
+			"properties": {
+        "exec-cmd.timeout": {
+          "type": "number",
+          "default": 10000,
+          "description": "If timeout is greater than 0, then it will kill the child process if it runs longer than timeout milliseconds."
+        },
+        "exec-cmd.maxBuffer": {
+          "type": "number",
+          "default": 204800,
+          "description": "Specifies the largest amount of data allowed on stdout or stderr - if this value is exceeded then the child process is killed."
+        },
+        "exec-cmd.killSignal": {
+          "type": "string",
+          "default": "SIGTERM",
+          "description": "The child process is killed with killSignal. (SIGTERM || SIGINT || SIGKILL)"
+        }
+			}
+		}
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.5.2",
+    "vscode": "^1.1.5",
+    "mocha": "^3.5.0",
+    "eslint": "^4.6.1",
+    "@types/node": "^7.0.0",
+    "@types/mocha": "^2.2.42"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2"
+  }
+}
